@@ -1,0 +1,19 @@
+@echo off
+title AutoUAC
+color 71
+
+PUSHD %~DP0 & cd /d "%~dp0"
+%1 %2
+mshta vbscript:createobject("shell.application").shellexecute("%~s0","goto :runas","","runas",1)(window.close)&goto :eof
+:runas
+
+cd C:\Program Files\Veyon
+taskkill /IM veyon-master.exe /f
+taskkill /IM veyon-server.exe /f
+taskkill /IM veyon-service.exe /f
+taskkill /IM veyon-wcli.exe /f
+taskkill /IM veyon-worker.exe /f
+del Qt5Core.dll
+echo @techarerm
+echo Version:1.4
+pause
